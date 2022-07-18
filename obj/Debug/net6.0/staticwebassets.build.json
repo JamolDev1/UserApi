@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "aqMxKC66PcTJR3C79fWLCCT7LrJOg3G3BowN0rhca5k=",
+  "Source": "DatabaseSql",
+  "BasePath": "_content/DatabaseSql",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
