@@ -24,5 +24,6 @@ public class User
     
     [Required]
     public EGender Gender { get; set; }
+    public ICollection<Book> Books { get; set; }
 
 }
