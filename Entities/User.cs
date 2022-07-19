@@ -25,7 +25,4 @@ public class User
     [Required]
     public EGender Gender { get; set; }
 
-
-
-
 }
