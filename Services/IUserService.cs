@@ -1,6 +1,3 @@
-
-using Databasesql.Entities;
-
 namespace Databasesql.Services; 
 public interface IUserService <TEntity> where TEntity : class
 {
