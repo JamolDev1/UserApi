@@ -23,7 +23,7 @@ public class UserService : IUserService<User>
             await _context.SaveChangesAsync();
             return (true, null);
         }
-        catch (System.Exception e)
+        catch (Exception e)
         {
              return (false , e);
         }

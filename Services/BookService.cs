@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Databasesql.Data;
 using Databasesql.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -16,26 +17,55 @@ public class BookService : IBookService<Book>
         
     }
 
-    public Task<(bool IsSuccess, Exception e)> DeleteAsync(Guid id)
+    public async Task<(bool IsSuccess, Exception e)> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        try
+        {        
+            var book = await GetByIdAsync(id); 
+            _context.Books.Remove(book);
+            await _context.SaveChangesAsync();
+            return (true,null);
+        }
+        catch(Exception e)
+        {
+            return (false, e);
+        }
     }
 
     public Task<List<Book>> GetAllAync()
         => Task.FromResult(_context.Books.ToList());
 
-    public Task<Book> GetByIdAsync(Guid id)
+    public async Task<Book> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+         return await _context.Books.FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public Task<(bool IsSuccess, Exception e, Book entity)> InsertAsync(Book entity)
+    public async Task<(bool IsSuccess, Exception e, Book entity)> InsertAsync(Book entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var res = await _context.AddAsync(entity);
+            await _context.SaveChangesAsync();
+            return(true , null , entity);   
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"This Book was not added{entity}");
+            return (false, e , null);
+        }
     }
 
-    public Task<(bool IsSuccess, Exception e)> UpdateAsyn(Book entity)
+    public async Task<(bool IsSuccess, Exception e)> UpdateAsyn(Book entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _context.Books.Update(entity);
+            await _context.SaveChangesAsync();
+            return (true ,null);
+        }
+        catch (Exception e)
+        {
+            return (false , e);
+        }
     }
 }
